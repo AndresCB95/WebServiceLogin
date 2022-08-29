@@ -1,10 +1,12 @@
 package edu.udea.main.business;
 
 import edu.udea.main.model.Usuario;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+@Service
 public class GestorUsuario {
 
     private ArrayList<Usuario> usuarios;
@@ -41,16 +43,36 @@ public class GestorUsuario {
         throw new Exception("Usuario Existe");
     }
 
-    public Usuario updateUsuario(Usuario usuario_update) throws Exception {
+    public Usuario updateUsuario(Usuario usuario_update, String id) throws Exception {
         try {
-            Usuario usuario_bd = getUsuario(usuario_update.getNombreUsuario());
+            Usuario usuario_bd = getUsuario(id);
+
+            if(usuario_update.getNombreUsuario() != null && !usuario_update.getNombreUsuario().equals("")){
+                usuario_bd.setNombreUsuario(usuario_update.getNombreUsuario());
+            }
 
             if(usuario_update.getNombre() != null && !usuario_update.getNombre().equals("")){
                 usuario_bd.setNombre(usuario_update.getNombre());
             }
+
             if(usuario_update.getPassword() != null && !usuario_update.getPassword().equals("")) {
                 usuario_bd.setPassword(usuario_update.getPassword());
             }
+
+            return usuario_bd;
+        } catch (Exception e) {
+            throw new Exception("Usuario NO existe, fallo actualización de datos");
+        }
+    }
+
+
+    public Usuario updateUsuarioAll(Usuario usuario_update, String id) throws Exception {
+        try {
+            Usuario usuario_bd = getUsuario(id);
+
+            usuario_bd.setNombreUsuario(usuario_update.getNombreUsuario());
+            usuario_bd.setNombre(usuario_update.getNombre());
+            usuario_bd.setPassword(usuario_update.getPassword());
 
             return usuario_bd;
         } catch (Exception e) {
@@ -64,5 +86,17 @@ public class GestorUsuario {
 
     public void setUsuarios(ArrayList<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public String deleteUsuario(String id) throws Exception {
+        try {
+            Usuario usuario = getUsuario(id);
+
+            this.usuarios.remove(usuario);
+
+            return "Eliminado exitoso";
+        } catch (Exception e) {
+            throw new Exception("Usuario NO Existe para Eliminar");
+        }
     }
 }
