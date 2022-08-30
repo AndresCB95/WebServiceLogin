@@ -1,7 +1,7 @@
 package edu.udea.main.controlador;
 
 
-import edu.udea.main.business.GestorUsuario;
+import edu.udea.main.service.GestorUsuario;
 import edu.udea.main.model.ObjetoRespuesta;
 import edu.udea.main.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;

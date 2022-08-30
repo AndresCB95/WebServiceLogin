@@ -1,9 +1,19 @@
 package edu.udea.main.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuario")
 public class Usuario {
 
+    @Column
     private String nombre;
+    @Id
     private String nombreUsuario;
+    @Column
     private String password;
 
     public Usuario(String nombre, String nombreUsuario, String password) {

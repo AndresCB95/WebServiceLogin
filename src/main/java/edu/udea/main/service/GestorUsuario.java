@@ -1,4 +1,4 @@
-package edu.udea.main.business;
+package edu.udea.main.service;
 
 import edu.udea.main.model.Usuario;
 import org.springframework.stereotype.Service;
