@@ -2,6 +2,8 @@ package edu.udea.main.controlador;
 
 
 import edu.udea.main.service.GestorUsuario;
+import edu.udea.main.service.GestorUsuarioInterface;
+import edu.udea.main.service.GestorUsuarioList;
 import edu.udea.main.model.ObjetoRespuesta;
 import edu.udea.main.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +11,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class UsuarioControlador {
 
     @Autowired
-    private GestorUsuario gestorUsuario;
+    private GestorUsuarioInterface gestorUsuario;
 
     @GetMapping("/usuario/usuarios")
-    public ResponseEntity<ArrayList<Usuario>> getUsuarios(){
+    public ResponseEntity<List<Usuario>> getUsuarios(){
         return new ResponseEntity<>(gestorUsuario.getUsuarios(), HttpStatus.OK);
     }
 
