@@ -1,9 +1,7 @@
 package edu.udea.main.controlador;
 
 
-import edu.udea.main.service.GestorUsuario;
 import edu.udea.main.service.GestorUsuarioInterface;
-import edu.udea.main.service.GestorUsuarioList;
 import edu.udea.main.model.ObjetoRespuesta;
 import edu.udea.main.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +71,7 @@ public class UsuarioControlador {
             Usuario usuario_bd = gestorUsuario.updateUsuario(usuario_update, id);
             return new ResponseEntity<>(new ObjetoRespuesta("Actualización Exitosa",usuario_bd),HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(new ObjetoRespuesta(e.getMessage(),null),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -89,7 +88,6 @@ public class UsuarioControlador {
         }
 
     }
-
 
 }
 
