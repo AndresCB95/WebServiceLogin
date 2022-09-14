@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,8 @@ public class Usuario {
     @Column
     private String password;
 
+    private String roles;
+
 
     public Usuario(String nombre, String nombreUsuario, String password) {
         this.nombre = nombre;
@@ -27,6 +30,15 @@ public class Usuario {
    public Usuario(){
 
    }
+
+    public String getRoles() {
+
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
 
     public String getNombre() {
         return nombre;

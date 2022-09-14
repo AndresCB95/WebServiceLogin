@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,6 +8,13 @@
 </head>
 <body>
 <h1> Bienvenido a la sesión </h1>
+
+<div sec:authorize="!isAuthenticated()">
+  <a th:href="@{/oauth2/authorization/auth0}">Log In</a>
+</div>
+<div sec:authorize="isAuthenticated()">
+  <p>You are logged in!</p>
+</div>
 
 
 <table class="table">
