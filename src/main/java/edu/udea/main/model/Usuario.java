@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+enum ROLES{
+    ADMIN,USER
+}
+
 @Entity
 @Table(name="usuario")
 public class Usuario {
@@ -15,11 +19,11 @@ public class Usuario {
     private String nombre;
     @Id
     private String nombreUsuario;
+
     @Column
     private String password;
 
     private String roles;
-
 
     public Usuario(String nombre, String nombreUsuario, String password) {
         this.nombre = nombre;
@@ -32,7 +36,6 @@ public class Usuario {
    }
 
     public String getRoles() {
-
         return roles;
     }
 

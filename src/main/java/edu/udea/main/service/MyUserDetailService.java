@@ -12,20 +12,19 @@ import org.springframework.stereotype.Service;
 public class MyUserDetailService implements UserDetailsService {
 
     @Autowired
-    GestorUsuario gestorUsuario;
+    GestorUsuarioInterface gestorUsuarioInterface;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Usuario user = null;
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         try {
-            System.out.println(gestorUsuario);
-            System.out.println(userName);
-            user = gestorUsuario.getUsuario(userName);
+            System.out.println(username);
+            Usuario user = gestorUsuarioInterface.getUsuario(username);
             System.out.println(user);
+            return new MyUserDetail(user);
         } catch (Exception e) {
-            throw new UsernameNotFoundException("Not found: " + userName);
+            throw new UsernameNotFoundException(e.getMessage());
         }
 
-        return new MyUserDetail(user);
     }
 }

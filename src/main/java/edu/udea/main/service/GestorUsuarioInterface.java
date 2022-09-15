@@ -8,10 +8,10 @@ public interface GestorUsuarioInterface {
 
     public List<Usuario> getUsuarios();
     public Usuario getUsuario(String id) throws Exception;
-    public String setUsuario(Usuario usuario_parametro);
+    public String setUsuario(Usuario usuario_parametro) throws Exception;
     public Usuario updateUsuarioAll(Usuario usuario_update, String id) throws Exception;
     public Usuario updateUsuario(Usuario usuario_update, String id) throws Exception;
-    public String deleteUsuario(String id);
+    public String deleteUsuario(String id) throws Exception;
 
 
 }

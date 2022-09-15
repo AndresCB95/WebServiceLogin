@@ -1,42 +1,46 @@
 package edu.udea.main.model;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MyUserDetail implements UserDetails {
 
-    private String userName;
+    private String username;
     private String password;
-    private boolean active;
-    private List<GrantedAuthority> authorities;
+    private List <GrantedAuthority> authorities;
 
-    public MyUserDetail(Usuario user) {
-        this.active = true;
-        this.userName = user.getNombreUsuario();
-        this.password = user.getPassword();
-        this.authorities = Arrays.stream(user.getRoles().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+    public MyUserDetail(Usuario usuario){
+        this.username = usuario.getNombreUsuario();
+        this.password = usuario.getPassword();
+        List <GrantedAuthority> roles = new ArrayList<>();
+
+        // ADMIN,USER,EMPLEADO,APRENDIZ
+        for (String rol : usuario.getRoles().split(",")) {
+            roles.add(
+                new SimpleGrantedAuthority(rol)
+            );
+        }
+
+        this.authorities = roles;
     }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return null;
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return this.username;
     }
 
     @Override
@@ -56,6 +60,6 @@ public class MyUserDetail implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return true;
     }
 }

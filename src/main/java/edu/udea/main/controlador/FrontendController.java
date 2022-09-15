@@ -25,7 +25,6 @@ public class FrontendController {
     @GetMapping("/login")
     public String getLogin(Model model){
         model.addAttribute("formUsuario",new Usuario());
-
         return "login";
     }
 
@@ -33,12 +32,6 @@ public class FrontendController {
     public String getWelcome(Model model){
         model.addAttribute("usuarios",gestorUsuario.getUsuarios());
         return "welcome";
-    }
-
-    @PostMapping("/login")
-    public String login(@ModelAttribute("formUsuario") Usuario usuario){
-        System.out.println(usuario);
-        return "redirect:/welcome";
     }
 
 }
