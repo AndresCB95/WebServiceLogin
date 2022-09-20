@@ -20,9 +20,9 @@ public class MyUserDetail implements UserDetails {
         List <GrantedAuthority> roles = new ArrayList<>();
 
         // ADMIN,USER,EMPLEADO,APRENDIZ
-        for (String rol : usuario.getRoles().split(",")) {
+        for (ROLES rol : usuario.getRoles()) {
             roles.add(
-                new SimpleGrantedAuthority(rol)
+                new SimpleGrantedAuthority(rol.name())
             );
         }
 

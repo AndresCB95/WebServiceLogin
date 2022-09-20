@@ -14,8 +14,8 @@ public class GestorUsuarioList{
 
         this.usuarios = new ArrayList<>();
 
-        this.usuarios.add(new Usuario("Prueba1", "Prueba","1234"));
-        this.usuarios.add(new Usuario("Prueba1", "Andres","1234"));
+        //this.usuarios.add(new Usuario("Prueba1", "Prueba","1234"));
+        //this.usuarios.add(new Usuario("Prueba1", "Andres","1234"));
     }
 
 

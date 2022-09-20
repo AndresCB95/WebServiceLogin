@@ -11,6 +11,10 @@
 <div sec:authorize="isAuthenticated()">
 <h1> Bienvenido a la sesión </h1>
 
+  <form th:action="@{/logout}" method="POST">
+    <button type="submit">Cerrar Sesión </button>
+  </form>
+
 <table class="table">
   <thead>
   <tr>

@@ -1,5 +1,6 @@
 package edu.udea.main.security;
 
+import org.hibernate.query.criteria.internal.expression.SubqueryComparisonModifierExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
+    @Autowired
+    SuccesGoogle succesGoogle;
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userDetailsService);
@@ -35,13 +40,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user").hasAnyRole("ADMIN","USER")
                 .antMatchers("/").permitAll()
                 .antMatchers("/login*").permitAll()
+                .antMatchers("/oauth/**").permitAll()
+
                 .and()
+
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("nombreUsuario")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/welcome");
+                .defaultSuccessUrl("/welcome")
+
+                .and()
+
+                .oauth2Login()
+                .loginPage("/login")
+                .successHandler(succesGoogle)
+
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
         ;
+
+        http.csrf().disable();
+
     }
 
 }

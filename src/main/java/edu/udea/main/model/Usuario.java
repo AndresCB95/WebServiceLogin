@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 enum ROLES{
-    ADMIN,USER
+    ADMIN,
+    USER
 }
+
 
 @Entity
 @Table(name="usuario")
@@ -23,23 +25,26 @@ public class Usuario {
     @Column
     private String password;
 
-    private String roles;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = ROLES.class)
+    private List<ROLES>roles;
 
-    public Usuario(String nombre, String nombreUsuario, String password) {
+    public Usuario(String nombre, String nombreUsuario, String password, List<ROLES> roles) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.password = password;
+        this.roles = roles;
     }
 
    public Usuario(){
 
    }
 
-    public String getRoles() {
-        return roles;
+    public List<ROLES>  getRoles() {
+      return roles;
     }
 
-    public void setRoles(String roles) {
+    public void setRoles(List<ROLES> roles) {
         this.roles = roles;
     }
 
