@@ -15,12 +15,15 @@
     <button type="submit">Cerrar Sesión </button>
   </form>
 
+  <a href="/addUser"> añadir usuario</a>
+
 <table class="table">
   <thead>
   <tr>
     <th scope="col">Nombre</th>
     <th scope="col">Nombre Usuario</th>
     <th scope="col">Password</th>
+    <th scope="col">Acciones</th>
   </tr>
   </thead>
   <tbody>
@@ -28,6 +31,14 @@
     <td th:text="${usuario.nombre}"></td>
     <td th:text="${usuario.nombreUsuario}"></td>
     <td th:text="${usuario.password}"></td>
+    <td>
+      <form th:action="@{/usuario/front/{id}(id=${usuario.nombreUsuario})}" th:method="delete">
+        <button type="submit">Delete</button>
+      </form>
+      <form th:action="@{/usuario/front/{id}(id=${usuario.nombreUsuario})}" method="get">
+        <button type="submit">Editar</button>
+      </form>
+    </td>
   </tr>
 
   </tbody>

@@ -7,6 +7,7 @@ import edu.udea.main.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,17 +41,16 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/usuario")
-    public ResponseEntity<String> postUsuario(@RequestBody Usuario usuario_parametro){
+    public ResponseEntity<String> postUsuario(
+            @RequestBody Usuario usuario_parametro){
 
         try {
             String mensaje = gestorUsuario.setUsuario(usuario_parametro);
-
             return new ResponseEntity<>(mensaje,HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
 
