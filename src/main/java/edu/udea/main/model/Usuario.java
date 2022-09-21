@@ -7,11 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-enum ROLES{
-    ADMIN,
-    USER
-}
-
 
 @Entity
 @Table(name="usuario")
@@ -26,7 +21,7 @@ public class Usuario {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = ROLES.class)
+    @ElementCollection(targetClass = ROLES.class, fetch = FetchType.EAGER)
     private List<ROLES>roles;
 
     public Usuario(String nombre, String nombreUsuario, String password, List<ROLES> roles) {
@@ -79,6 +74,7 @@ public class Usuario {
                 "nombre='" + nombre + '\'' +
                 ", nombreUsuario='" + nombreUsuario + '\'' +
                 ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

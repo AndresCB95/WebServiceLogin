@@ -22,19 +22,20 @@
         <label for="input_nombre_completo">Nombre Completo</label>
         <input th:field="*{nombre}" id="input_nombre_completo" type="text" placeholder="Ingrese nombre completo ....">
     </div>
-    <!-- table class="table">
+
+    <table class="table">
         <thead>
         <tr>
             <th scope="col">ROLES</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><input type="checkbox"></td>
+        <tr th:each="rol : ${ROLES}">
+            <td><input th:field="*{roles}" type="checkbox" th:text="${rol.name}" th:value="${rol.name}"></td>
         </tr>
 
         </tbody>
-    </table -->
+    </table>
 
     <button type="submit">Registrar usuario</button>
 

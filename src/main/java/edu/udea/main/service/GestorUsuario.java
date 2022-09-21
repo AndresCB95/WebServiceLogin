@@ -53,6 +53,9 @@ public class GestorUsuario implements GestorUsuarioInterface{
         if(usuario_update.getPassword() != null && !usuario_update.getPassword().equals("")){
             usuario_bd.setPassword(usuario_update.getPassword());
         }
+        if(usuario_update.getRoles() != null){
+            usuario_bd.setRoles(usuario_update.getRoles());
+        }
 
         return repositorio.save(usuario_bd);
     }

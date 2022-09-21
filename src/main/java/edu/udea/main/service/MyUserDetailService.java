@@ -23,6 +23,7 @@ public class MyUserDetailService implements UserDetailsService {
             System.out.println(user);
             return new MyUserDetail(user);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new UsernameNotFoundException(e.getMessage());
         }
 
