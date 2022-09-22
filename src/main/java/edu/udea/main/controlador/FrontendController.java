@@ -33,7 +33,6 @@ public class FrontendController {
     @GetMapping("/welcome")
     public String getWelcome(Model model){
 
-        model.addAttribute("rol",ROLES.ADMIN);
         model.addAttribute("usuarios",gestorUsuario.getUsuarios());
         return "welcome";
     }
@@ -43,6 +42,8 @@ public class FrontendController {
         model.addAttribute("user",new Usuario());
         model.addAttribute("ROLES", ROLES.values());
         return "add-user";
+
+
     }
 
     @PostMapping("/usuario/front")

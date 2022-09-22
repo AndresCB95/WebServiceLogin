@@ -12,7 +12,7 @@
     </div>
     <div>
         <label for="input_nombre_usuario">Nombre Usuario</label>
-        <input th:field="*{nombreUsuario}" id="input_nombre_usuario" type="text" placeholder="Ingrese nombre usuario">
+        <input pattern="([A-Z])\w+" th:field="*{nombreUsuario}" id="input_nombre_usuario" type="text" placeholder="Ingrese nombre usuario">
     </div>
     <div>
         <label for="input_password">Password</label>

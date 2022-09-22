@@ -9,42 +9,59 @@
 <body>
 
 <div sec:authorize="isAuthenticated()">
-<h1> Bienvenido a la sesión </h1>
 
-  <form th:action="@{/logout}" method="POST">
-    <button type="submit">Cerrar Sesión </button>
-  </form>
+    <div class="modal-body">
+        <p>Popup</p>
+    </div>
+    <div sec:authorize="hasAnyRole('ADMIN','USER')">
 
-  <a href="/addUser"> añadir usuario</a>
+        <h1> Bienvenido a la sesión </h1>
 
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">Nombre</th>
-    <th scope="col">Nombre Usuario</th>
-    <th scope="col">Password</th>
-    <th scope="col">Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="usuario : ${usuarios}">
-    <td th:text="${usuario.nombre}"></td>
-    <td th:text="${usuario.nombreUsuario}"></td>
-    <td th:text="${usuario.password}"></td>
-    <td>
-      <form th:action="@{/usuario/front/{id}(id=${usuario.nombreUsuario})}" th:method="delete">
-        <button type="submit">Delete</button>
-      </form>
-      <form th:action="@{/usuario/front/{id}(id=${usuario.nombreUsuario})}" method="get">
-        <button type="submit">Editar</button>
-      </form>
-    </td>
-  </tr>
+          <form th:action="@{/logout}" method="POST">
+            <button type="submit">Cerrar Sesión </button>
+          </form>
+        <div sec:authorize="hasRole('ADMIN')">
+          <a href="/addUser"> añadir usuario</a>
+        </div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Nombre Usuario</th>
+            <th scope="col">Password</th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.nombreUsuario}"></td>
+            <td th:text="${usuario.password}"></td>
+            <td>
+                <div sec:authorize="hasAnyRole('ADMIN')">
+                  <form th:action="@{/usuario/front/{id}(id=${usuario.nombreUsuario})}" th:method="delete">
+                    <button type="submit">Delete</button>
+                  </form>
+                </div>
+              <form th:action="@{/usuario/front/{id}(id=${usuario.nombreUsuario})}" method="get">
+                <button type="submit">Editar</button>
+              </form>
+            </td>
+          </tr>
 
-  </tbody>
-</table>
+          </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+<div sec:authorize="!isAuthenticated()">
+<a href="/login">Iniciar sesion</a>
+</div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-</div>
 </body>
 </html>

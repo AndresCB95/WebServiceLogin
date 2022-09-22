@@ -27,6 +27,8 @@ public class SuccesGoogle implements AuthenticationSuccessHandler {
 
         DefaultOidcUser user = (DefaultOidcUser) authentication.getPrincipal();
 
+        System.out.println(user);
+
         String correoUser = user.getEmail();
 
         System.out.println(correoUser + " Correo Google!!!");
@@ -34,6 +36,7 @@ public class SuccesGoogle implements AuthenticationSuccessHandler {
             gestorUsuario.getUsuario(correoUser);
             response.sendRedirect("/welcome");
         } catch (Exception e) {
+            e.printStackTrace();
             new SecurityContextLogoutHandler().logout(request,response,authentication);
             //logout
             //response.sendRedirect("/login");

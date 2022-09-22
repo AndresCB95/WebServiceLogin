@@ -1,6 +1,6 @@
 package edu.udea.main.model;
 
 public enum ROLES{
-    ADMIN,
-    USER
+    ROLE_ADMIN,
+    ROLE_USER
 }
